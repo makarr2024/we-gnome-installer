@@ -42,6 +42,8 @@
      "acceptedAnswer": {"@type": "Answer", "text": "Официальной версии Wallpaper Engine для Linux нет. Но обои из его Мастерской можно показывать на рабочем столе Linux с помощью открытого движка linux-wallpaperengine и менеджера WE Manager. На Ubuntu с GNOME всё ставится одной командой: curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash"}},
     {"@type": "Question", "name": "Как сделать, чтобы Wallpaper Engine работал на Ubuntu?",
      "acceptedAnswer": {"@type": "Answer", "text": "Купите и установите Wallpaper Engine в Steam, затем в терминале выполните curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash, перезайдите в систему и выберите обои в приложении WE Manager."}},
+    {"@type": "Question", "name": "Обои не реагируют на звук и музыку в Linux — что делать?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Обои реагируют на звук, который играет на компьютере (музыка, YouTube, игры), а не на микрофон. Включите музыку на самом ПК. Реагируют только обои, которые поддерживают аудио (в Мастерской отмечены как audio responsive). Не включайте в настройках WE Manager отключение обработки звука."}},
     {"@type": "Question", "name": "Нужно ли запускать Wallpaper Engine через Proton или Wine?",
      "acceptedAnswer": {"@type": "Answer", "text": "Нет. Сам Wallpaper Engine запускать не нужно — обои рисует нативный движок linux-wallpaperengine. Из Steam берутся только файлы обоев и ассеты Wallpaper Engine."}},
     {"@type": "Question", "name": "Будут ли обои реагировать на курсор мыши в Linux?",
@@ -238,6 +240,13 @@ mkdir -p ~/.local/share/we-manager-app && mv squashfs-root ~/.local/share/we-man
 <li>Убедитесь, что скачаны и базовые обои, на которых построен пресет.</li>
 </ul>
 
+<h3>Обои не реагируют на звук и музыку</h3>
+<ul>
+<li>Обои слушают <b>звук компьютера</b> — то, что играет в динамиках или наушниках (музыка, YouTube, игры), — <b>а не микрофон</b>. Включите музыку на самом ПК.</li>
+<li>Реагируют только обои с поддержкой звука (в Мастерской — «Audio responsive»). Обычное видео на звук не реагирует.</li>
+<li>Проверьте, что движок слушает звук: <code>pactl list source-outputs | grep wallpaperengine</code> — должна быть строка <code>wallpaperengine-audioprocessing</code>.</li>
+</ul>
+
 <h3>Поверх обоев видно старое видео / обои мерцают</h3>
 <p>Работает другая программа обоев — чаще всего расширение Hanabi. Отключите его:</p>
 <pre><code>gnome-extensions disable hanabi-extension@jeffshee.github.io</code></pre>
@@ -255,6 +264,8 @@ mkdir -p ~/.local/share/we-manager-app && mv squashfs-root ~/.local/share/we-man
 <p>Нет. Обои рисует нативный Linux-движок. Из Steam берутся только файлы обоев и ассеты Wallpaper Engine.</p></details>
 <details><summary>Обои реагируют на мышь, как в Windows?</summary>
 <p>Да — обои типа Scene и Web получают курсор и клики. Видео-обои просто проигрываются.</p></details>
+<details><summary>Обои реагируют на микрофон?</summary>
+<p>Нет. Как и в Windows, обои реагируют на звук, который играет на компьютере, а не на микрофон.</p></details>
 <details><summary>Работает ли на Wayland?</summary>
 <p>Да, на GNOME Wayland — через расширение GNOME Shell, которое ставит установщик. X11 тоже поддерживается.</p></details>
 <details><summary>Можно ли без покупки Wallpaper Engine?</summary>
