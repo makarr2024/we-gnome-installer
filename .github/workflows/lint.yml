@@ -1,0 +1,17 @@
+name: lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: shellcheck install.sh uninstall.sh
+      - name: python
+        run: python3 -m py_compile lib/*.py
+      - name: preset fixer self-test
+        run: python3 tests/test_fix_presets.py
