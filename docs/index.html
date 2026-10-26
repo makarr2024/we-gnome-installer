@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wallpaper Engine на Linux Ubuntu — как установить живые обои (2026)</title>
+<meta name="description" content="Как сделать, чтобы Wallpaper Engine работал на Linux Ubuntu: живые и интерактивные обои из Мастерской Steam на рабочем столе GNOME, реакция на курсор. Установка одной командой и полная пошаговая инструкция.">
+<meta name="keywords" content="wallpaper engine linux, wallpaper engine ubuntu, живые обои ubuntu, анимированные обои linux, wallpaper engine gnome, wallpaper engine wayland, linux-wallpaperengine, интерактивные обои linux">
+<link rel="canonical" href="https://makarr2024.github.io/we-gnome-installer/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Wallpaper Engine на Linux Ubuntu — установка одной командой">
+<meta property="og:description" content="Живые и интерактивные обои из Мастерской Wallpaper Engine на рабочем столе Ubuntu (GNOME, Wayland). Полная инструкция и решение проблем.">
+<meta property="og:url" content="https://makarr2024.github.io/we-gnome-installer/">
+<meta name="author" content="makarr2024">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Как установить Wallpaper Engine на Linux Ubuntu",
+  "description": "Живые и интерактивные обои Wallpaper Engine из Мастерской Steam на рабочем столе Ubuntu с GNOME.",
+  "inLanguage": "ru",
+  "totalTime": "PT10M",
+  "supply": [
+    {"@type": "HowToSupply", "name": "Ubuntu 22.04 или новее с рабочим столом GNOME"},
+    {"@type": "HowToSupply", "name": "Steam с купленным и установленным Wallpaper Engine"}
+  ],
+  "step": [
+    {"@type": "HowToStep", "name": "Установите Steam и Wallpaper Engine", "text": "Установите Steam (из Центра приложений или sudo apt install steam), войдите и установите купленный Wallpaper Engine. Запускать его не нужно."},
+    {"@type": "HowToStep", "name": "Запустите установку одной командой", "text": "Откройте терминал (Ctrl+Alt+T) и выполните: curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash"},
+    {"@type": "HowToStep", "name": "Перезайдите в систему", "text": "Выйдите из сеанса и войдите снова, чтобы GNOME загрузил расширение, которое кладёт обои под рабочий стол."},
+    {"@type": "HowToStep", "name": "Выберите обои", "text": "Откройте WE Manager, во вкладке «Мастерская» нажмите «Подписаться», дождитесь загрузки, затем в «Библиотеке» нажмите «Воспроизвести обои»."}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Работает ли Wallpaper Engine на Linux?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Официальной версии Wallpaper Engine для Linux нет. Но обои из его Мастерской можно показывать на рабочем столе Linux с помощью открытого движка linux-wallpaperengine и менеджера WE Manager. На Ubuntu с GNOME всё ставится одной командой: curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash"}},
+    {"@type": "Question", "name": "Как сделать, чтобы Wallpaper Engine работал на Ubuntu?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Купите и установите Wallpaper Engine в Steam, затем в терминале выполните curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash, перезайдите в систему и выберите обои в приложении WE Manager."}},
+    {"@type": "Question", "name": "Нужно ли запускать Wallpaper Engine через Proton или Wine?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Нет. Сам Wallpaper Engine запускать не нужно — обои рисует нативный движок linux-wallpaperengine. Из Steam берутся только файлы обоев и ассеты Wallpaper Engine."}},
+    {"@type": "Question", "name": "Будут ли обои реагировать на курсор мыши в Linux?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Да, обои типа Scene и Web получают положение курсора и клики, как в Windows. Обои типа Video просто проигрываются."}},
+    {"@type": "Question", "name": "Работает ли Wallpaper Engine на Wayland?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Да. На GNOME Wayland обои выводит специальное расширение GNOME Shell из комплекта движка, установщик ставит и включает его сам. После установки нужно один раз перезайти в систему."}},
+    {"@type": "Question", "name": "Почему в WE Manager ошибка «Steam not running»?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Либо Steam не запущен, либо Steam установлен как snap и программа не находит ~/.steam. Установщик создаёт ссылку ~/.steam на ~/snap/steam/common/.steam. Также окно WE Manager должно быть открыто — свернутый в трей, он к Steam не подключается."}},
+    {"@type": "Question", "name": "Почему обои показывают белый или чёрный экран?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Чаще всего файлы обоев удалены (например, после отписки в Мастерской) — подпишитесь заново. У пресетов с картинкой пользователя движок не находит картинку; установщик ставит службу we-fix-presets, которая это исправляет."}}
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #ffffff; --fg: #1d1d1f; --muted: #5b5b66; --card: #f4f4f7; --border: #e2e2e8;
+  --accent: #6d3fd8; --code-bg: #16161d; --code-fg: #f2f2f5; --warn: #fff6dc; --warn-border: #e8c860;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111116; --fg: #ececf1; --muted: #a2a2b0; --card: #1b1b23; --border: #2c2c38;
+    --accent: #a98bff; --code-bg: #0a0a0e; --code-fg: #ececf1; --warn: #2b2512; --warn-border: #6b5a1c;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Ubuntu, sans-serif; }
+main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 12px; }
+h2 { font-size: 1.4rem; margin: 44px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+h3 { font-size: 1.1rem; margin: 28px 0 8px; }
+p, li { color: var(--fg); }
+.lead { font-size: 1.1rem; color: var(--muted); }
+a { color: var(--accent); }
+code { font-family: ui-monospace, "Ubuntu Mono", monospace; font-size: .92em; background: var(--card); padding: 1px 5px; border-radius: 4px; }
+pre { position: relative; background: var(--code-bg); color: var(--code-fg); padding: 16px; padding-right: 96px; border-radius: 10px; overflow-x: auto; font-size: .9rem; }
+pre code { background: none; padding: 0; color: inherit; }
+.copy { position: absolute; top: 10px; right: 10px; border: 1px solid #555; background: #2a2a35; color: #fff; border-radius: 6px; padding: 4px 10px; font-size: .8rem; cursor: pointer; }
+.box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
+.box.warn { background: var(--warn); border-color: var(--warn-border); }
+.box h2 { border: 0; margin-top: 0; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+nav ol { columns: 2; column-gap: 32px; padding-left: 20px; margin: 0; }
+@media (max-width: 600px) { nav ol { columns: 1; } h1 { font-size: 1.6rem; } }
+details { border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 600; }
+footer { margin-top: 56px; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+<article>
+<h1>Как сделать, чтобы Wallpaper Engine работал на Linux Ubuntu</h1>
+<p class="lead">Живые и интерактивные обои из Мастерской Wallpaper Engine прямо на рабочем столе Ubuntu:
+сцены реагируют на курсор, видео проигрывается, обои выбираются в удобном менеджере. Без Windows, Wine и Proton.</p>
+
+<div class="box">
+<h2 id="bystro">Коротко: установка одной командой</h2>
+<p>Откройте терминал (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>) и выполните:</p>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash</code></pre>
+<p>Потом <b>выйдите из сеанса и войдите снова</b>, откройте приложение <b>WE Manager</b> и выберите обои.
+Нужен Wallpaper Engine, купленный в Steam. Подробности — ниже.</p>
+</div>
+
+<nav aria-label="Содержание">
+<ol>
+<li><a href="#rabotaet-li">Работает ли Wallpaper Engine на Linux</a></li>
+<li><a href="#trebovaniya">Что нужно</a></li>
+<li><a href="#poshagovo">Пошаговая установка</a></li>
+<li><a href="#oboi">Как выбрать и поставить обои</a></li>
+<li><a href="#avtozapusk">Обои после перезагрузки</a></li>
+<li><a href="#vruchnuyu">Установка вручную, без скрипта</a></li>
+<li><a href="#problemy">Проблемы и решения</a></li>
+<li><a href="#faq">Частые вопросы</a></li>
+<li><a href="#udalenie">Удаление</a></li>
+</ol>
+</nav>
+
+<h2 id="rabotaet-li">Работает ли Wallpaper Engine на Linux</h2>
+<p>Официальной версии Wallpaper Engine для Linux нет, а запуск Windows-версии через Proton не кладёт обои
+на рабочий стол Ubuntu. Но сами обои из Мастерской на Linux показывать можно — для этого есть открытые проекты:</p>
+<ul>
+<li><a href="https://github.com/WallpaperEngineLover/linux-wallpaperengine-kde">linux-wallpaperengine</a> — нативный движок, который рисует сцены, веб-обои и видео из Мастерской;</li>
+<li><a href="https://github.com/WallpaperEngineLover/we_manager">WE Manager</a> — менеджер в стиле Wallpaper Engine: библиотека, Мастерская Steam, плейлисты, настройки;</li>
+<li>расширение GNOME Shell из комплекта движка — без него на GNOME Wayland обои не попадают под рабочий стол.</li>
+</ul>
+<p><a href="https://github.com/makarr2024/we-gnome-installer">Установщик</a> ставит всё это одной командой и исправляет
+ошибки, на которые обычно натыкаются на Ubuntu: Steam из snap, белый экран у пресетов, конфликт с Hanabi.</p>
+
+<h2 id="trebovaniya">Что нужно</h2>
+<table>
+<tr><th>Система</th><td>Ubuntu 22.04, 24.04 или новее (или другой Linux с glibc 2.35+), процессор x86_64</td></tr>
+<tr><th>Рабочий стол</th><td>GNOME — стандартный в Ubuntu. Wayland и X11 подходят</td></tr>
+<tr><th>Steam</th><td>любой: из apt, snap («Центр приложений») или flatpak</td></tr>
+<tr><th>Wallpaper Engine</th><td>купленный и установленный в Steam. Запускать его не нужно</td></tr>
+<tr><th>Видеокарта</th><td>с поддержкой OpenGL 3.3 — подходит почти любая встроенная Intel/AMD и NVIDIA</td></tr>
+<tr><th>Место на диске</th><td>около 1,5 ГБ плюс сами обои</td></tr>
+</table>
+<p>Проверено на Ubuntu 24.04, GNOME 46, Wayland, Steam из snap.</p>
+
+<h2 id="poshagovo">Пошаговая установка</h2>
+<h3>Шаг 1. Установите Steam и Wallpaper Engine</h3>
+<p>Если Steam ещё нет — поставьте его из «Центра приложений Ubuntu» или командой:</p>
+<pre><code>sudo apt install steam</code></pre>
+<p>Войдите в аккаунт, найдите <b>Wallpaper Engine</b> в библиотеке и нажмите «Установить».
+Steam может предложить Proton — соглашайтесь, это нужно только для загрузки файлов.</p>
+
+<h3>Шаг 2. Запустите установщик</h3>
+<p>Если нет <code>curl</code>: <code>sudo apt install curl</code>. Затем:</p>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash</code></pre>
+<p>Установщик:</p>
+<ul>
+<li>находит Steam и папку Мастерской Wallpaper Engine;</li>
+<li>скачивает WE Manager и движок linux-wallpaperengine с GitHub и сверяет контрольные суммы SHA-256;</li>
+<li>ставит и включает расширение GNOME Shell;</li>
+<li>для Steam из snap создаёт ссылку <code>~/.steam</code>, иначе Мастерская пишет «Steam not running»;</li>
+<li>ставит службу <code>we-fix-presets</code>, которая чинит белый экран у пресетов;</li>
+<li>добавляет WE Manager в меню приложений и в автозапуск;</li>
+<li>предлагает отключить Hanabi, если он стоит (две программы обоев мешают друг другу).</li>
+</ul>
+<p>Всё ставится в домашнюю папку, пароль <code>sudo</code> не спрашивается. Длится несколько минут — скачивается около 400 МБ.</p>
+
+<h3>Шаг 3. Перезайдите в систему</h3>
+<p>Нажмите на меню в правом верхнем углу → «Выключение / Завершение сеанса» → «Завершить сеанс» и войдите снова.
+GNOME загружает новые расширения только при входе. <b>Без этого обои не появятся.</b></p>
+
+<h2 id="oboi">Как выбрать и поставить обои</h2>
+<ol>
+<li>Запустите Steam и откройте <b>WE Manager</b> из меню приложений.</li>
+<li>Вкладка <b>«Мастерская»</b> — поиск по Мастерской Steam. Фильтр <b>«Тип»</b>:
+<b>Scene</b> и <b>Web</b> реагируют на курсор, <b>Video</b> просто проигрывается.</li>
+<li>Нажмите <b>«Подписаться»</b> <i>один раз</i>. Повторное нажатие — это отписка: Steam удалит файлы.</li>
+<li>Дождитесь окончания загрузки («Загрузка… N%»).</li>
+<li>Вкладка <b>«Библиотека»</b> → нажмите на обои → <b>«Воспроизвести обои»</b>.</li>
+</ol>
+<p>Уже скачанные в Steam обои появятся в «Библиотеке» сами (если нет — кнопка сканирования библиотеки).</p>
+
+<h2 id="avtozapusk">Чтобы обои оставались после перезагрузки</h2>
+<p>WE Manager запускается вместе с системой, но после перезагрузки сам включает только <b>плейлист</b>,
+а не отдельные обои. Поэтому:</p>
+<ol>
+<li>«Плейлисты» → создайте плейлист и добавьте в него нужные обои (можно одни).</li>
+<li>«Настройки» → автозапуск → выберите этот плейлист.</li>
+</ol>
+
+<h2 id="vruchnuyu">Установка вручную, без скрипта</h2>
+<p>Для тех, кто хочет понимать каждый шаг. Это ровно то, что делает установщик.</p>
+<details>
+<summary>Показать ручную установку</summary>
+<h3>1. Движок</h3>
+<p>Скачайте <code>linux-wallpaperengine-generic-portable-x86_64.tar.gz</code> из
+<a href="https://github.com/WallpaperEngineLover/linux-wallpaperengine-kde/releases/latest">релизов движка</a> и распакуйте:</p>
+<pre><code>mkdir -p ~/.local/share/linux-wallpaperengine-kde
+tar -xzf linux-wallpaperengine-generic-portable-x86_64.tar.gz -C ~/.local/share/linux-wallpaperengine-kde --strip-components=1</code></pre>
+<h3>2. Расширение GNOME</h3>
+<pre><code>cp -r ~/.local/share/linux-wallpaperengine-kde/gnome-shell-extension/linux-wallpaperengine@wallpaperenginelover.github.io ~/.local/share/gnome-shell/extensions/
+gnome-extensions enable linux-wallpaperengine@wallpaperenginelover.github.io</code></pre>
+<p>На Wayland команда <code>enable</code> сработает только после перезахода — тогда включите расширение ещё раз
+или в приложении «Расширения».</p>
+<h3>3. WE Manager</h3>
+<p>Скачайте <code>WE-Manager-*.AppImage</code> из <a href="https://github.com/WallpaperEngineLover/we_manager/releases/latest">релизов WE Manager</a>.
+Чтобы не ставить <code>libfuse2</code>, распакуйте его:</p>
+<pre><code>chmod +x WE-Manager-*.AppImage
+./WE-Manager-*.AppImage --appimage-extract
+mkdir -p ~/.local/share/we-manager-app && mv squashfs-root ~/.local/share/we-manager-app/
+~/.local/share/we-manager-app/squashfs-root/AppRun</code></pre>
+<h3>4. Steam из snap</h3>
+<pre><code>[ -e ~/.steam ] || ln -s ~/snap/steam/common/.steam ~/.steam</code></pre>
+<h3>5. Папка Мастерской</h3>
+<p>В настройках WE Manager укажите папку <code>…/Steam/steamapps/workshop/content/431960</code>.
+Для snap-Steam это <code>~/snap/steam/common/.local/share/Steam/steamapps/workshop/content/431960</code>.</p>
+</details>
+
+<h2 id="problemy">Проблемы и решения</h2>
+<h3>Обои не появились на рабочем столе</h3>
+<p>Вы не перезашли в систему после установки. Проверьте, что расширение работает:</p>
+<pre><code>gnome-extensions info linux-wallpaperengine@wallpaperenginelover.github.io</code></pre>
+<p>Должно быть <code>State: ACTIVE</code> (<code>Состояние: ACTIVE</code>). Если <code>INACTIVE</code> — включите его в приложении «Расширения».</p>
+
+<h3>«Не удалось загрузить Мастерскую: Steam not running»</h3>
+<ul>
+<li>Запустите Steam и войдите в аккаунт.</li>
+<li>Окно WE Manager должно быть открыто: свёрнутый в трей, он к Steam не подключается.</li>
+<li>Steam из snap: должна быть ссылка <code>~/.steam</code> (её создаёт установщик). Проверка: <code>ls ~/.steam/sdk64/steamclient.so</code>.</li>
+<li>Закройте Windows-версию Wallpaper Engine, если запускали её через Proton.</li>
+</ul>
+
+<h3>Белый или пустой экран вместо обоев</h3>
+<ul>
+<li><b>Обои удалены</b> — например, после отписки в Мастерской. Подпишитесь заново и дождитесь загрузки.</li>
+<li><b>Это пресет</b> (обои на основе других, например к «ASCII Digital Image» со своей картинкой).
+Движок ищет картинку не там, где она лежит. Служба установщика это чинит; запустить вручную:
+<pre><code>python3 ~/.local/share/we-gnome-installer/we-fix-presets -v</code></pre></li>
+<li>Убедитесь, что скачаны и базовые обои, на которых построен пресет.</li>
+</ul>
+
+<h3>Поверх обоев видно старое видео / обои мерцают</h3>
+<p>Работает другая программа обоев — чаще всего расширение Hanabi. Отключите его:</p>
+<pre><code>gnome-extensions disable hanabi-extension@jeffshee.github.io</code></pre>
+
+<h3>Сцена выглядит не так, как на Windows</h3>
+<p>Движок поддерживает не все эффекты Wallpaper Engine. Это ограничение linux-wallpaperengine;
+сообщить о проблеме можно в <a href="https://github.com/WallpaperEngineLover/linux-wallpaperengine-kde/issues">его трекере</a>.</p>
+
+<h3>Ноутбук быстро разряжается</h3>
+<p>В настройках WE Manager снизьте FPS (например, до 30) и включите паузу на батарее. Обои сами
+ставятся на паузу, когда окно развёрнуто на весь экран.</p>
+
+<h2 id="faq">Частые вопросы</h2>
+<details><summary>Нужен ли Windows, Wine или Proton?</summary>
+<p>Нет. Обои рисует нативный Linux-движок. Из Steam берутся только файлы обоев и ассеты Wallpaper Engine.</p></details>
+<details><summary>Обои реагируют на мышь, как в Windows?</summary>
+<p>Да — обои типа Scene и Web получают курсор и клики. Видео-обои просто проигрываются.</p></details>
+<details><summary>Работает ли на Wayland?</summary>
+<p>Да, на GNOME Wayland — через расширение GNOME Shell, которое ставит установщик. X11 тоже поддерживается.</p></details>
+<details><summary>Можно ли без покупки Wallpaper Engine?</summary>
+<p>Нет. Мастерская и ассеты движка доступны только владельцам Wallpaper Engine в Steam.</p></details>
+<details><summary>Подойдёт для Linux Mint, Kubuntu, Fedora?</summary>
+<p>Установщик рассчитан на GNOME и проверен на Ubuntu 24.04. На Fedora с GNOME должен работать.
+На KDE (Kubuntu), Cinnamon (Linux Mint) и других окружениях сам движок работает, но расширение GNOME
+к ним не относится — WE Manager подскажет, что нужно для вашего рабочего стола.</p></details>
+<details><summary>Это безопасно?</summary>
+<p>Установщик ставит всё в домашнюю папку без <code>sudo</code>, скачивает программы только из их официальных
+релизов на GitHub и проверяет контрольные суммы SHA-256. Код установщика открыт для чтения:
+<a href="https://github.com/makarr2024/we-gnome-installer">github.com/makarr2024/we-gnome-installer</a>.</p></details>
+<details><summary>Как обновить?</summary>
+<p>Запустите команду установки ещё раз — скачается только то, что вышло новее.</p></details>
+
+<h2 id="udalenie">Удаление</h2>
+<pre><code>~/.local/share/we-gnome-installer/uninstall.sh</code></pre>
+<p>С параметром <code>--purge</code> удалятся и настройки WE Manager. Обои из Мастерской и Steam не затрагиваются.</p>
+</article>
+
+<footer>
+<p>Установщик: <a href="https://github.com/makarr2024/we-gnome-installer">github.com/makarr2024/we-gnome-installer</a> · © 2026 makarr2024.
+WE Manager и linux-wallpaperengine — проекты своих авторов. Wallpaper Engine — продукт Wallpaper Engine Team.
+Статья обновлена 26 октября 2026.</p>
+</footer>
+</main>
+<script>
+document.querySelectorAll('pre').forEach(function (pre) {
+  var b = document.createElement('button');
+  b.className = 'copy'; b.type = 'button'; b.textContent = 'Копировать';
+  b.addEventListener('click', function () {
+    var text = pre.querySelector('code').innerText;
+    var done = function () { b.textContent = 'Скопировано'; setTimeout(function () { b.textContent = 'Копировать'; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
+  });
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>

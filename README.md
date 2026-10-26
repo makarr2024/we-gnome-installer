@@ -1,5 +1,7 @@
 # Интерактивные обои Wallpaper Engine для Ubuntu (GNOME)
 
+📖 **Полная инструкция:** [makarr2024.github.io/we-gnome-installer](https://makarr2024.github.io/we-gnome-installer/) — как сделать, чтобы Wallpaper Engine работал на Linux Ubuntu.
+
 Установщик в одну команду: живые обои из Мастерской Steam на рабочем столе Ubuntu,
 как в Wallpaper Engine на Windows. Сцены и веб-обои реагируют на курсор, видео
 проигрывается, обои выбираются в удобном менеджере.

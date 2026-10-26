@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://makarr2024.github.io/we-gnome-installer/sitemap.xml
