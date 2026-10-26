@@ -1,21 +1,32 @@
-MIT License
+Copyright (c) 2026 makarr2024. All rights reserved.
 
-Copyright (c) 2026 makarr2024
+This repository ("the Software") is published so that people can install and use it.
+It is not open source.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+You MAY:
+  - download and run the Software on your own computers, for personal or commercial use;
+  - read the source code to check what it does.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+You MAY NOT, without prior written permission of the copyright holder:
+  - copy, republish or redistribute the Software or substantial parts of it,
+    in original or modified form, including in other repositories, packages or websites;
+  - publish modified versions or derivative works of the Software;
+  - remove or change this notice, or present the Software as your own work.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Linking to this repository and the official install command is allowed and welcome.
+Forking on GitHub is permitted only to the extent required by the GitHub Terms of Service
+and only for proposing changes back to this repository.
+
+The programs this Software downloads and installs (WE Manager, linux-wallpaperengine and its
+GNOME Shell extension) are separate works by their own authors and are covered by their own
+licenses. Wallpaper Engine, its assets and Workshop content belong to their respective owners.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+---
+
+Все права защищены. Устанавливать и пользоваться можно свободно. Копировать, публиковать,
+изменять и распространять программу или её части без письменного разрешения автора нельзя.

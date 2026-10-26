@@ -35,6 +35,23 @@
 
 ## Установка
 
+Одна команда в терминале:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash
+```
+
+С параметрами (см. ниже) — после `-s --`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash -s -- --disable-hanabi
+```
+
+Команда скачивает последний релиз установщика и запускает `install.sh`.
+Если `curl` нет: `sudo apt install curl`.
+
+Или вручную:
+
 ```bash
 git clone https://github.com/makarr2024/we-gnome-installer.git
 cd we-gnome-installer
@@ -55,7 +72,7 @@ cd we-gnome-installer
 -y, --yes               не задавать вопросов
 ```
 
-Обновление — запустите `./install.sh` ещё раз: он скачает только то, что вышло новее.
+Обновление — запустите команду установки ещё раз: он скачает только то, что вышло новее.
 
 ## Как пользоваться
 
@@ -111,4 +128,10 @@ cd we-gnome-installer
 
 ## Лицензия
 
-MIT — см. [LICENSE](LICENSE). Устанавливаемые программы распространяются под своими лицензиями.
+© 2026 makarr2024. Все права защищены — см. [LICENSE](LICENSE).
+Устанавливать и пользоваться можно свободно, в том числе на работе. Копировать, публиковать,
+изменять и распространять установщик или его части без разрешения автора нельзя.
+Ссылаться на этот репозиторий и команду установки — можно.
+
+Устанавливаемые программы (WE Manager, linux-wallpaperengine) — отдельные проекты своих авторов
+под своими лицензиями.

@@ -4,6 +4,8 @@
 
 Первый выпуск.
 
+- Установка одной командой: `curl -fsSL https://raw.githubusercontent.com/makarr2024/we-gnome-installer/main/get.sh | bash`.
+
 - Установка WE Manager и linux-wallpaperengine (portable-сборка) из релизов GitHub с проверкой SHA-256.
 - Установка и включение расширения GNOME Shell из комплекта движка.
 - Поиск Steam (обычный, snap, flatpak) и папки Мастерской Wallpaper Engine, в том числе в других библиотеках Steam.
