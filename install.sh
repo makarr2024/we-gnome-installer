@@ -5,7 +5,7 @@
 # Всё ставится в домашнюю папку, root не нужен.
 set -euo pipefail
 
-INSTALLER_VERSION="1.0.0"
+INSTALLER_VERSION="1.1.0"
 
 MANAGER_REPO="WallpaperEngineLover/we_manager"
 ENGINE_REPO="WallpaperEngineLover/linux-wallpaperengine-kde"
@@ -351,6 +351,7 @@ install_gnome_extension() {
     if [ "$was_known" = 1 ] && [ -n "$old_version" ] && [ "$old_version" = "$new_version" ] && [ "$force" = 0 ]; then
         info "Уже установлена версия $new_version."
         gsettings_list_add enabled-extensions "$EXT_UUID"
+        patch_gnome_extension
         return
     fi
 
@@ -376,6 +377,21 @@ install_gnome_extension() {
         info "Обновлено до версии $new_version. Она заработает после повторного входа в систему."
         relogin_needed=1
     fi
+    patch_gnome_extension
+}
+
+# Моргание значков при клике по рабочему столу и сплющенные обои в списке приложений —
+# см. lib/patch-gnome-extension.py. Код расширения другой версии не трогаем.
+patch_gnome_extension() {
+    local result
+    result="$(python3 -I "$SRC_DIR/lib/patch-gnome-extension.py" "$EXT_DIR" 2>&1)" || true
+    case "$result" in
+        patched)
+            info "Исправления расширения применены (значки не моргают, обои в обзоре не сплющены)."
+            relogin_needed=1 ;;
+        "already patched") ;;
+        *) warn "Исправления расширения не применены: $result" ;;
+    esac
 }
 
 handle_hanabi() {
@@ -396,6 +412,7 @@ install_tools() {
     step "Исправление пресетов и автозапуск"
     mkdir -p "$TOOLS_DIR"
     install -m 755 "$SRC_DIR/lib/we-fix-presets.py" "$TOOLS_DIR/we-fix-presets"
+    install -m 755 "$SRC_DIR/lib/patch-gnome-extension.py" "$TOOLS_DIR/patch-gnome-extension"
     install -m 644 "$SRC_DIR/lib/steam_libraries.py" "$TOOLS_DIR/steam_libraries.py"
     install -m 755 "$SRC_DIR/uninstall.sh" "$TOOLS_DIR/uninstall.sh"
     state_set installer_version "$INSTALLER_VERSION"
@@ -430,6 +447,7 @@ Name=WE Manager
 Exec=$APP_DIR/squashfs-root/we-manager --no-sandbox --minimized
 Terminal=false
 X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=10
 EOF
         info "WE Manager будет запускаться свёрнутым в трей при входе в систему."
     else
@@ -474,6 +492,8 @@ Description=Раскладывает файлы пресетов Wallpaper Engin
 Type=oneshot
 ExecStartPre=/bin/sleep 5
 ExecStart=/usr/bin/python3 -I $TOOLS_DIR/we-fix-presets
+# WE Manager может переустановить расширение из комплекта движка — патч накладывается снова
+ExecStartPost=-/usr/bin/python3 -I $TOOLS_DIR/patch-gnome-extension $EXT_DIR
 
 [Install]
 WantedBy=default.target
@@ -503,7 +523,7 @@ EOF
 start_manager() {
     [ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ] || return 0
     pgrep -f "^$APP_DIR/squashfs-root/we-manager" >/dev/null && return 0
-    (cd "$APP_DIR/squashfs-root" && setsid ./AppRun >/dev/null 2>&1 < /dev/null &)
+    (cd "$APP_DIR/squashfs-root" && exec setsid -f ./AppRun >/dev/null 2>&1 < /dev/null) || true
 }
 
 # ---------------------------------------------------------------- main

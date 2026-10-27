@@ -142,7 +142,7 @@ footer { margin-top: 56px; color: var(--muted); font-size: .9rem; }
 <tr><th>Видеокарта</th><td>с поддержкой OpenGL 3.3 — подходит почти любая встроенная Intel/AMD и NVIDIA</td></tr>
 <tr><th>Место на диске</th><td>около 1,5 ГБ плюс сами обои</td></tr>
 </table>
-<p>Проверено на Ubuntu 24.04, GNOME 46, Wayland, Steam из snap.</p>
+<p>Проверено на Ubuntu 24.04 (GNOME 46) и Ubuntu 26.04 (GNOME 50), Wayland, Steam из snap.</p>
 
 <h2 id="poshagovo">Пошаговая установка</h2>
 <h3>Шаг 1. Установите Steam и Wallpaper Engine</h3>
@@ -247,6 +247,18 @@ mkdir -p ~/.local/share/we-manager-app && mv squashfs-root ~/.local/share/we-man
 <li>Проверьте, что движок слушает звук: <code>pactl list source-outputs | grep wallpaperengine</code> — должна быть строка <code>wallpaperengine-audioprocessing</code>.</li>
 </ul>
 
+<h3>Значки на рабочем столе моргают при клике</h3>
+<p>Ошибка расширения GNOME в связке со значками рабочего стола (DING) на GNOME 47 и новее: при клике значки на один кадр
+оказываются под обоями. Установщик накладывает исправление; оно начинает работать после повторного входа в систему.
+Если вы ставили раньше — просто запустите команду установки ещё раз и перезайдите.</p>
+
+<h3>В списке приложений обои сплющены</h3>
+<p>Исправляется тем же патчем: в обзоре обои обрезаются по краям, как обычный фон GNOME, а не растягиваются.</p>
+
+<h3>После входа в систему обои не включились</h3>
+<p>WE Manager успел запуститься раньше, чем GNOME загрузил расширение. Установщик запускает его с задержкой 10 секунд;
+если ставили раньше — запустите команду установки ещё раз.</p>
+
 <h3>Поверх обоев видно старое видео / обои мерцают</h3>
 <p>Работает другая программа обоев — чаще всего расширение Hanabi. Отключите его:</p>
 <pre><code>gnome-extensions disable hanabi-extension@jeffshee.github.io</code></pre>
@@ -289,7 +301,7 @@ mkdir -p ~/.local/share/we-manager-app && mv squashfs-root ~/.local/share/we-man
 <footer>
 <p>Установщик: <a href="https://github.com/makarr2024/we-gnome-installer">github.com/makarr2024/we-gnome-installer</a> · © 2026 makarr2024.
 WE Manager и linux-wallpaperengine — проекты своих авторов. Wallpaper Engine — продукт Wallpaper Engine Team.
-Статья обновлена 26 октября 2026.</p>
+Статья обновлена 27 октября 2026.</p>
 </footer>
 </main>
 <script>
